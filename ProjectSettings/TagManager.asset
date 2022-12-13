@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - Student
+  - Jaguar
+  - Alkohole
+  - Sciana
+  - "Skrzy\u017Cowanie"
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 838526701
+    locked: 0
+  - name: Sciana
+    uniqueID: 2005545539
+    locked: 0
+  - name: Alkohole
+    uniqueID: 2978473361
+    locked: 0
+  - name: Jaguar
+    uniqueID: 1597022801
+    locked: 0
+  - name: Student
+    uniqueID: 3822918671
+    locked: 0
+  - name: Skrzyzowanie
+    uniqueID: 2407934389
+    locked: 0
