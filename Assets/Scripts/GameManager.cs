@@ -1,7 +1,7 @@
 using UnityEngine;
 
 
-public class GameManager : StudentMove
+public class GameManager : MonoBehaviour
 {
     public Jaguar[] jaguary;
     public Transform student; // tutaj powinien byc typ Student, ale wtedy nie da siê dodac obiektu z poziomu unity do GM

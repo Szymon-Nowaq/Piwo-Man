@@ -46,8 +46,12 @@ public class StudentMove : MonoBehaviour
                 setVector(currentDirection);
             }
         }
-        // Vector2 translation = Vdirection * speed * Time.deltaTime;
-        //this.rigidbody.MovePosition(rigidbody.position + translation);
+       if(Input.GetKeyDown(KeyCode.R))
+       {
+            currentDirection = direction.none;
+            setVector(currentDirection);
+            transform.rotation = Quaternion.Euler(0, 0, 90.0f);
+        }
     }
 
     void FixedUpdate()
