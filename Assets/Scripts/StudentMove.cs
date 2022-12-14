@@ -19,8 +19,7 @@ public class StudentMove : MonoBehaviour
     public new Rigidbody2D rb { get; private set; }
     public GameObject[] nodes;
     void Start() 
-    {
-        transform.rotation = Quaternion.Euler(0, 0, 90.0f); // ustalamy poczatkow� rotacj�, jaka� dziwna funkcja ze stackoverflow, chuj wie jak dzia�a, wa�ne �e dzia�a, dajemy rotacje w X,Y,Z 
+    { 
         rb = GetComponent<Rigidbody2D>();
         speed = 10.0f;
         nodes = Resources.LoadAll<GameObject>("Prefabs/Skrzyzowanie");
@@ -127,5 +126,9 @@ public class StudentMove : MonoBehaviour
             default:
                 break;
         }
+    }
+    public void StopStudent()
+    {
+        currentDirection = direction.none;
     }
 }

@@ -133,6 +133,7 @@ GameObject:
   m_Component:
   - component: {fileID: 17825482}
   - component: {fileID: 17825481}
+  - component: {fileID: 17825483}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -152,9 +153,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e142dee3a8fca594ca34371394c993a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 0
+  scianyLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  Vdirection: {x: 0, y: 0}
+  nodes: []
   jaguary: []
   student: {fileID: 1700191625}
   alkohole: {fileID: 1475650606}
+  restartCords: {x: 15, y: 25}
 --- !u!4 &17825482
 Transform:
   m_ObjectHideFlags: 0
@@ -170,6 +178,27 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &17825483
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 17825480}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!1 &354304389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1217,7 +1246,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 64
+  orthographic size: 67
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1326,7 +1355,7 @@ Transform:
   m_GameObject: {fileID: 593709950}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.0000095, y: -0.0000916, z: 0}
-  m_LocalScale: {x: 230, y: 120, z: 1}
+  m_LocalScale: {x: 230, y: 130, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -11160,6 +11189,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Vdirection: {x: 0, y: 0}
+  nodes: []
 --- !u!58 &1700191622
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -11257,7 +11287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1700191620}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7, y: 51, z: 0}
+  m_LocalPosition: {x: 15, y: 25, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

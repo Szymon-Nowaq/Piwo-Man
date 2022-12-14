@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+
+public class GameManager : StudentMove
 {
     public Jaguar[] jaguary;
     public Transform student; // tutaj powinien byc typ Student, ale wtedy nie da siê dodac obiektu z poziomu unity do GM
@@ -8,14 +9,15 @@ public class GameManager : MonoBehaviour
 
     public int score { get; private set; }
     public int lives { get; private set; }
-
+    public int jaguarMultiplier { get; private set; } = 1;
+    public Vector2 restartCords = new Vector2(15.0f, 25.0f);
     private void Start()
     {
         NewGame();
     }
     private void Update()
     {
-        if (lives <= 0 && Input.anyKeyDown)
+        if ((lives <= 0 && Input.anyKeyDown) || Input.GetKeyDown(KeyCode.R))
         {
             NewGame();
         }
@@ -35,9 +37,11 @@ public class GameManager : MonoBehaviour
 
     private void ResetState()
     {
+        ResetJaguarMultiplier();
         for (int i = 0; i < this.jaguary.Length; i++)
             this.jaguary[i].gameObject.SetActive(true);
         this.student.gameObject.SetActive(true);
+        student.position = restartCords;
     }
     private void GameOver()
     {
@@ -58,7 +62,8 @@ public class GameManager : MonoBehaviour
 
     public void JaguarPokonany(Jaguar jaguar)
     {
-        SetScore(this.score + jaguar.pktPokonanieJaguara);
+        SetScore(this.score + (jaguar.pktPokonanieJaguara * this.jaguarMultiplier));
+        this.jaguarMultiplier++;
     }
 
     public void StudentZgon()
@@ -73,5 +78,54 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
         }
+    }
+
+    public void PiwoWypite(Piwko piwo)
+    {
+        piwo.gameObject.SetActive(false);
+        SetScore(this.score + piwo.points);
+        if (!CzyStolJestPusty())
+        {
+            this.student.gameObject.SetActive(false);
+            Invoke(nameof(NewRound), 4.0f);
+        }
+    }
+
+    public void WodkaWypita(Wodeczka wodka)
+    {
+        wodka.gameObject.SetActive(false);
+        SetScore(this.score + wodka.points);
+        if (!CzyStolJestPusty())
+        {
+            this.student.gameObject.SetActive(false);
+            Invoke(nameof(NewRound), 4.0f);
+        }
+        CancelInvoke();
+        Invoke(nameof(ResetJaguarMultiplier), 8.0f);
+    }
+
+    public void JagerWypity(Jager jager)
+    {
+        jager.gameObject.SetActive(false);
+        SetLives(this.lives++);
+        if (!CzyStolJestPusty())
+        {
+            this.student.gameObject.SetActive(false);
+            Invoke(nameof(NewRound), 4.0f);
+        }
+    }
+
+    private bool CzyStolJestPusty()
+    {
+        foreach (Transform alkohol in this.alkohole)
+        {
+            if (alkohol.gameObject.activeSelf)
+                return true;
+        }
+        return false;
+    }
+    private void ResetJaguarMultiplier()
+    {
+        jaguarMultiplier = 1;
     }
 }

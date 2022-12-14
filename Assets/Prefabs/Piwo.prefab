@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4295185838617173960}
   - component: {fileID: 8046791335859232957}
   - component: {fileID: 8389704196373288990}
+  - component: {fileID: 8075023571028270495}
   m_Layer: 8
   m_Name: Piwo
   m_TagString: Untagged
@@ -111,3 +112,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.25, y: 0.25}
   m_EdgeRadius: 0
+--- !u!114 &8075023571028270495
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2487332124179369026}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c15412db1b330084c9dd04deb3d1c78b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
