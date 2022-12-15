@@ -25,37 +25,24 @@ public class StudentMove : MonoBehaviour
         transform.position = new Vector2(15.0f, 29.0f);
         rb = GetComponent<Rigidbody2D>();
         speed = 15.0f;
-        ColissionCheck();
     }
 
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space)) // zatrzymanie studenta, wlasnorecznie spacja lub na skrzyzowaniu
-        {
             currentDirection = direction.none;
-            setVector(currentDirection); // po kazdej zmianie enumowej zmiennej zmieniamy nasz wektor (potrzebne do systemu kolizji)
-        }
         if (currentDirection == direction.none) // jak stoimy (skrzyzowanie) to dopiero wtedy mo�emy sobie wybra� kierunek     
-        {
             currentDirection = setDirection();
-            setVector(currentDirection);
-        }
         else // jak sie ruszamy, to mozemy zmienic kierunek na przeciwny
         {
             buforDirection = setDirection(); // ustalamy nowy kierunek, ale trzeba sprawdzic czy jest on przeciwny, wiec bufor
             if (isDirectionOpposite(buforDirection, currentDirection)) // fajna funkcja
             {
                 currentDirection = buforDirection;
-                setVector(currentDirection);
             }
         }
         if (Input.GetKeyDown(KeyCode.R))
-        {
             currentDirection = direction.none;
-            setVector(currentDirection);
-            transform.rotation = Quaternion.Euler(0, 0, 90.0f);
-        }
-
     }
 
     void FixedUpdate()
@@ -104,29 +91,6 @@ public class StudentMove : MonoBehaviour
         return false;
     }
 
-    public void setVector(direction current)
-    {
-        switch (current)
-        {
-            case direction.left:
-                Vdirection = new Vector2(-1, 0);
-                break;
-            case direction.right:
-                Vdirection = new Vector2(1, 0);
-                break;
-            case direction.up:
-                Vdirection = new Vector2(0, 1);
-                break;
-            case direction.down:
-                Vdirection = new Vector2(0, -1);
-                break;
-            case direction.none:
-                Vdirection = new Vector2(0, 0);
-                break;
-            default:
-                break;
-        }
-    }
     public void TouchedNode()
     {
         switch (currentDirection)
@@ -152,16 +116,6 @@ public class StudentMove : MonoBehaviour
         currentDirection = direction.none;
     }
 
-    public void ColissionCheck()
-    {
-        while (true)
-        {
-            oldposition = rb.position;
-            Invoke(nameof(GetNewPosition), 1.0f);
-            if (oldposition == newposition)
-                currentDirection = direction.none;
-        }
-    }
     public void GetNewPosition()
     {
         newposition = rb.position;
