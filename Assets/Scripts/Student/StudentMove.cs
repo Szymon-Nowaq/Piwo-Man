@@ -16,18 +16,21 @@ public class StudentMove : MonoBehaviour
 
     public LayerMask scianyLayer;
     public Vector2 Vdirection = Vector2.zero;
+    public Vector2 oldposition;
+    public Vector2 newposition;
+
     public new Rigidbody2D rb { get; private set; }
-    public GameObject[] nodes;
-    void Start() 
-    { 
+    void Start()
+    {
+        transform.position = new Vector2(15.0f, 29.0f);
         rb = GetComponent<Rigidbody2D>();
-        speed = 10.0f;
-        nodes = Resources.LoadAll<GameObject>("Prefabs/Skrzyzowanie");
+        speed = 15.0f;
+        ColissionCheck();
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) || isOnNode(nodes)) // zatrzymanie studenta, wlasnorecznie spacja lub na skrzyzowaniu
+        if (Input.GetKeyDown(KeyCode.Space)) // zatrzymanie studenta, wlasnorecznie spacja lub na skrzyzowaniu
         {
             currentDirection = direction.none;
             setVector(currentDirection); // po kazdej zmianie enumowej zmiennej zmieniamy nasz wektor (potrzebne do systemu kolizji)
@@ -46,21 +49,23 @@ public class StudentMove : MonoBehaviour
                 setVector(currentDirection);
             }
         }
-       if(Input.GetKeyDown(KeyCode.R))
-       {
+        if (Input.GetKeyDown(KeyCode.R))
+        {
             currentDirection = direction.none;
             setVector(currentDirection);
             transform.rotation = Quaternion.Euler(0, 0, 90.0f);
         }
+
     }
 
     void FixedUpdate()
     {
+        
         switch (currentDirection)
-        { 
+        {
             case direction.left:
-                rb.MovePosition(rb.position + Vector2.left * Time.fixedDeltaTime * speed);     
-                transform.rotation = Quaternion.Euler(0, 0, 180.0f);   // tutaj juz nam zmienia nie po wektorze tylko ustalony k�t rotacji                         
+                rb.MovePosition(rb.position + Vector2.left * Time.fixedDeltaTime * speed);
+                transform.rotation = Quaternion.Euler(0, 0, 180.0f);   // tutaj juz nam zmienia nie po wektorze tylko ustalony k�t rotacji
                 break;
             case direction.right:
                 rb.MovePosition(rb.position + Vector2.right * Time.fixedDeltaTime * speed);
@@ -80,7 +85,7 @@ public class StudentMove : MonoBehaviour
         }
     }
 
-    public direction setDirection ()
+    public direction setDirection()
     {
         if (Input.GetKey(KeyCode.LeftArrow)) // jak wcisniemy jakis klawisz to zmieniamy do "currentDirection" 
             return direction.left;
@@ -92,22 +97,13 @@ public class StudentMove : MonoBehaviour
             return direction.up;
         return direction.none;
     }
-    bool isDirectionOpposite(direction a , direction b)
+    bool isDirectionOpposite(direction a, direction b)
     {
         if ((a + 3 == b) || (a - 3 == b)) // mmmmm ta uniwersalnosc
             return true;
         return false;
     }
-    public bool isOnNode(GameObject[] nodes)
-    {
-        for(int i = 0; i < nodes.Length; i++)
-        {
-            if (transform.position == nodes[i].transform.position)
-                return true;
-        }
-        return false;
-    }
-    
+
     public void setVector(direction current)
     {
         switch (current)
@@ -131,8 +127,44 @@ public class StudentMove : MonoBehaviour
                 break;
         }
     }
+    public void TouchedNode()
+    {
+        switch (currentDirection)
+        {
+            case direction.up:
+                rb.MovePosition(rb.position + Vector2.up);
+                break;
+            case direction.down:
+                rb.MovePosition(rb.position + Vector2.down);
+                break;
+            case direction.right:
+                rb.MovePosition(rb.position + Vector2.right);
+                break;
+            case direction.left:
+                rb.MovePosition(rb.position + Vector2.left);
+                break;
+        }
+        StopStudent();
+    }
+
     public void StopStudent()
     {
         currentDirection = direction.none;
     }
+
+    public void ColissionCheck()
+    {
+        while (true)
+        {
+            oldposition = rb.position;
+            Invoke(nameof(GetNewPosition), 1.0f);
+            if (oldposition == newposition)
+                currentDirection = direction.none;
+        }
+    }
+    public void GetNewPosition()
+    {
+        newposition = rb.position;
+    }
 }
+
