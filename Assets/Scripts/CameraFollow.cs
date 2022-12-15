@@ -1,28 +1,23 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.U2D.IK;
 
 public class CameraFollow : MonoBehaviour
 {
-    public Camera camera;
-    public Transform targetObject;
-    public Transform miasteczko;
-    private Vector3 initialOffset;
-    private Vector3 cameraPosition;
+    public Transform student;
+    public float miasteczkoX;
+    public float miasteczkoY;
     void Start()
     {
-        initialOffset = transform.position - targetObject.position;
-        Debug.Log((int)camera.scaledPixelHeight);
-        Debug.Log((int)camera.scaledPixelWidth);
+       
     }
-    void FixedUpdate()
+
+    void Update()
     {
-        if (((Mathf.Abs(camera.transform.position.x)) <= miasteczko.transform.localScale.x)
-        && ((Mathf.Abs(camera.transform.position.y)) <= miasteczko.transform.localScale.y))
-        {
-            cameraPosition = targetObject.position + initialOffset;
-            transform.position = cameraPosition;
-        }
+        if(MathF.Abs(student.position.x) <= 60)
+            transform.position = new Vector3(student.position.x, transform.position.y, transform.position.z);
+        if (MathF.Abs(student.position.y) <= 25)
+            transform.position = new Vector3(transform.position.x, student.position.y, transform.position.z);
     }
 }
