@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
 
 public class Node : MonoBehaviour
@@ -8,7 +9,8 @@ public class Node : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Student"))
         {
-            FindObjectOfType<StudentMove>().TouchedNode();
+            Debug.Log("Node");
+            //FindObjectOfType<StudentMove>().StopStudent();
         }
     }
 }

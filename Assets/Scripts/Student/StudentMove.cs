@@ -12,13 +12,9 @@ public class StudentMove : MonoBehaviour
 {
     public float speed; // jak szybko student ucieka, po w�dce zrobimy speed++ i b�dzie boost
     public enum direction { left, up, none, right, down }; // nasz w�asny typ danych, kt�ry mo�e mie� 5 stan�w, NIE RUSZAC ICH INDEKS�W ZA ZADNEGO CHUJA BO WSZYSTKO SIE WYWALI
-    direction currentDirection = direction.none, buforDirection = direction.none; // zmienna przechowujaca "kierunki"
-
-    public LayerMask scianyLayer;
+    public direction currentDirection = direction.none, buforDirection = direction.none; // zmienna przechowujaca "kierunki"
+    public LayerMask obstacleLayer;
     public Vector2 Vdirection = Vector2.zero;
-    public Vector2 oldposition;
-    public Vector2 newposition;
-
     public new Rigidbody2D rb { get; private set; }
     void Start()
     {
@@ -29,25 +25,16 @@ public class StudentMove : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) // zatrzymanie studenta, wlasnorecznie spacja lub na skrzyzowaniu
-            currentDirection = direction.none;
-        if (currentDirection == direction.none) // jak stoimy (skrzyzowanie) to dopiero wtedy mo�emy sobie wybra� kierunek     
-            currentDirection = setDirection();
-        else // jak sie ruszamy, to mozemy zmienic kierunek na przeciwny
-        {
-            buforDirection = setDirection(); // ustalamy nowy kierunek, ale trzeba sprawdzic czy jest on przeciwny, wiec bufor
-            if (isDirectionOpposite(buforDirection, currentDirection)) // fajna funkcja
-            {
-                currentDirection = buforDirection;
-            }
-        }
+        buforDirection = setDirection();
+        SetVector(buforDirection);
+        if(!Occupied(Vdirection))
+            currentDirection = buforDirection;
         if (Input.GetKeyDown(KeyCode.R))
             currentDirection = direction.none;
     }
 
     void FixedUpdate()
-    {
-        
+    {   
         switch (currentDirection)
         {
             case direction.left:
@@ -82,43 +69,64 @@ public class StudentMove : MonoBehaviour
             return direction.down;
         if (Input.GetKey(KeyCode.UpArrow))
             return direction.up;
-        return direction.none;
-    }
-    bool isDirectionOpposite(direction a, direction b)
-    {
-        if ((a + 3 == b) || (a - 3 == b)) // mmmmm ta uniwersalnosc
-            return true;
-        return false;
+        if (Input.GetKey(KeyCode.Space))
+            return direction.none;
+        return buforDirection;
     }
 
-    public void TouchedNode()
+    public void SetVector(direction current)
     {
-        switch (currentDirection)
+        switch(current)
         {
-            case direction.up:
-                rb.MovePosition(rb.position + Vector2.up);
-                break;
-            case direction.down:
-                rb.MovePosition(rb.position + Vector2.down);
+            case direction.left:
+                Vdirection = Vector2.left;
                 break;
             case direction.right:
-                rb.MovePosition(rb.position + Vector2.right);
+                Vdirection = Vector2.right;
                 break;
-            case direction.left:
-                rb.MovePosition(rb.position + Vector2.left);
+            case direction.up:
+                Vdirection = Vector2.up;
+                break;
+            case direction.down:
+                Vdirection = Vector2.down;
+                break;
+            case direction.none:
+                Vdirection = Vector2.zero;
                 break;
         }
-        StopStudent();
+    }
+    public bool Occupied(Vector2 direction)
+    {
+        RaycastHit2D hit = Physics2D.BoxCast(transform.position, Vector2.one * 0.75f, 0f, direction, 1.5f, obstacleLayer);
+        return hit.collider != null;
     }
 
-    public void StopStudent()
-    {
-        currentDirection = direction.none;
-    }
+    /* public void TouchedNode()
+     {
+         switch (currentDirection)
+         {
+             case direction.up:
+                 rb.MovePosition(rb.position + Vector2.up);
+                 break;
+             case direction.down:
+                 rb.MovePosition(rb.position + Vector2.down);
+                 break;
+             case direction.right:
+                 rb.MovePosition(rb.position + Vector2.right);
+                 break;
+             case direction.left:
+                 rb.MovePosition(rb.position + Vector2.left);
+                 break;
+         }
+         StopStudent();
+     }
 
-    public void GetNewPosition()
-    {
-        newposition = rb.position;
+     public void StopStudent()
+     {
+         currentDirection = direction.none;
+        
+    Debug.Log("funkcja");
     }
+    */
 }
 

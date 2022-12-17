@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < this.jaguary.Length; i++)
             this.jaguary[i].gameObject.SetActive(true);
         this.student.gameObject.SetActive(true);
-        student.transform.position = restartCords;
+        //student.transform.position = new Vector2(15.0f, 29.0f);
     }
     private void GameOver()
     {
