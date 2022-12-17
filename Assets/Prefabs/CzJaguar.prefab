@@ -79,5 +79,29 @@ PrefabInstance:
       propertyPath: m_Name
       value: CzJaguar
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3238275442009572054, guid: e87a0880d02949543856334998f6a1b8, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e87a0880d02949543856334998f6a1b8, type: 3}
+--- !u!1 &6612063852292078071 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8067825597921718950, guid: e87a0880d02949543856334998f6a1b8, type: 3}
+  m_PrefabInstance: {fileID: 3761747760210807633}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1083384722587467729
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6612063852292078071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8a8c7254b60b049ad89db83d0d8fcd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 8
+  speedMultiplier: 1
+  initialDirection: {x: 0, y: 0}
+  obstacleLayer:
+    serializedVersion: 2
+    m_Bits: 0
