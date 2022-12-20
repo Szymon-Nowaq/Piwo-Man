@@ -40,25 +40,15 @@ public class hindusMovement : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.LeftArrow)) // jak wcisniemy jakis klawisz to zmieniamy do "currentDirection" 
-            SetDirection(Vector2.left);
-        if (Input.GetKey(KeyCode.RightArrow))
-            SetDirection(Vector2.right);
-        if (Input.GetKey(KeyCode.DownArrow))
-            SetDirection(Vector2.down);
-        if (Input.GetKey(KeyCode.UpArrow))
-            SetDirection(Vector2.up);
-        if (Input.GetKey(KeyCode.Space))
-            direction = Vector2.zero;
-        // Try to move in the next direction while it's queued to make movements
-        // more responsive
+        if (nextDirection != Vector2.zero)    
+            SetDirection(nextDirection);
     }
 
     private void FixedUpdate()
     {
+        Vector2 position = rigidbody.position;
         Vector2 translation = direction * speed * speedMultiplier * Time.fixedDeltaTime;
-        rigidbody.MovePosition(rigidbody.position + translation);
-        SetRotation();
+        rigidbody.MovePosition(position + translation);
     }
 
     public void SetDirection(Vector2 direction, bool forced = false)
@@ -76,18 +66,6 @@ public class hindusMovement : MonoBehaviour
             Debug.Log("kolizja");
             nextDirection = direction;
         }
-    }
-
-    public void SetRotation()
-    {
-        if(direction == Vector2.down)
-            transform.rotation = Quaternion.Euler(0, 0, 270.0f);
-        if (direction == Vector2.up)
-            transform.rotation = Quaternion.Euler(0, 0, 90.0f);
-        if (direction == Vector2.right)
-            transform.rotation = Quaternion.Euler(0, 0, 0.0f);
-        if (direction == Vector2.left)
-            transform.rotation = Quaternion.Euler(0, 0, 180.0f);
     }
 
     public bool Occupied(Vector2 direction)

@@ -18,7 +18,6 @@ public class StudentMove : MonoBehaviour
     public new Rigidbody2D rb { get; private set; }
     void Start()
     {
-        transform.position = new Vector2(15.0f, 29.0f);
         rb = GetComponent<Rigidbody2D>();
         speed = 15.0f;
     }
@@ -27,8 +26,12 @@ public class StudentMove : MonoBehaviour
     {
         buforDirection = setDirection();
         SetVector(buforDirection);
-        if(!Occupied(Vdirection))
+        if (!Occupied(Vdirection))
+        {
             currentDirection = buforDirection;
+        }
+        else
+            Debug.Log("sciana");
         if (Input.GetKeyDown(KeyCode.R))
             currentDirection = direction.none;
     }
@@ -100,33 +103,12 @@ public class StudentMove : MonoBehaviour
         RaycastHit2D hit = Physics2D.BoxCast(transform.position, Vector2.one * 0.75f, 0f, direction, 1.5f, obstacleLayer);
         return hit.collider != null;
     }
-
-    /* public void TouchedNode()
-     {
-         switch (currentDirection)
-         {
-             case direction.up:
-                 rb.MovePosition(rb.position + Vector2.up);
-                 break;
-             case direction.down:
-                 rb.MovePosition(rb.position + Vector2.down);
-                 break;
-             case direction.right:
-                 rb.MovePosition(rb.position + Vector2.right);
-                 break;
-             case direction.left:
-                 rb.MovePosition(rb.position + Vector2.left);
-                 break;
-         }
-         StopStudent();
-     }
-
-     public void StopStudent()
-     {
-         currentDirection = direction.none;
-        
-    Debug.Log("funkcja");
+    public void ResetStudent()
+    {
+        currentDirection = direction.none;
+        buforDirection = direction.none;
+        transform.position = new Vector2(16.0f, 25.0f);
+        transform.rotation = Quaternion.Euler(0, 0, 90.0f);
     }
-    */
 }
 

@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2628275510538281446, guid: aae76b3beb926f14b904d6d36a881a3e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.31
+      objectReference: {fileID: 0}
+    - target: {fileID: 2628275510538281446, guid: aae76b3beb926f14b904d6d36a881a3e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.093
+      objectReference: {fileID: 0}
     - target: {fileID: 6090991405939873605, guid: aae76b3beb926f14b904d6d36a881a3e, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -71,5 +79,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: FJaguar
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4566936833044789888, guid: aae76b3beb926f14b904d6d36a881a3e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: aae76b3beb926f14b904d6d36a881a3e, type: 3}

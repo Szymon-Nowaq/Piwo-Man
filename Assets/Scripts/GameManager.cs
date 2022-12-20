@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     public int score { get; private set; }
     public int lives { get; private set; }
     public int jaguarMultiplier { get; private set; } = 1;
-    public Vector2 restartCords = new Vector2(15.0f, 29.0f);
     private void Start()
     {
         NewGame();
@@ -41,7 +40,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < this.jaguary.Length; i++)
             this.jaguary[i].gameObject.SetActive(true);
         this.student.gameObject.SetActive(true);
-        //student.transform.position = new Vector2(15.0f, 29.0f);
+        FindObjectOfType<StudentMove>().ResetStudent();
     }
     private void GameOver()
     {
