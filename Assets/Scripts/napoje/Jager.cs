@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class Jager : Piwko
 {
-    // Start is called before the first frame update
-    void Start()
+    public int jagerHealth = 1;
+    protected override void Eat()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        FindObjectOfType<GameManager>().JagerWypity(this);
     }
 }

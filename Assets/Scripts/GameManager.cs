@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
 
     public int score { get; private set; }
     public int lives { get; private set; }
+    public int maxLives = 5;
     public int jaguarMultiplier { get; private set; } = 1;
     private void Start()
     {
@@ -53,10 +54,15 @@ public class GameManager : MonoBehaviour
     private void SetScore(int newScore)
     {
         this.score = newScore;
+        FindObjectOfType<BarPoints>().setPoints(this.score);
     }
     private void SetLives(int newLives)
     {
-        this.lives = newLives;
+        if (newLives > maxLives)
+            this.lives = maxLives;
+        else
+            this.lives = newLives;
+        FindObjectOfType<BarHealth>().setHealth(this.lives);
     }
 
     public void JaguarPokonany(Jaguar jaguar)
@@ -93,7 +99,6 @@ public class GameManager : MonoBehaviour
     public void WodkaWypita(Wodeczka wodka)
     {
         wodka.gameObject.SetActive(false);
-        SetScore(this.score + wodka.points);
         if (!CzyStolJestPusty())
         {
             this.student.gameObject.SetActive(false);
@@ -106,7 +111,8 @@ public class GameManager : MonoBehaviour
     public void JagerWypity(Jager jager)
     {
         jager.gameObject.SetActive(false);
-        SetLives(this.lives++);
+        SetLives(this.lives + jager.jagerHealth);
+        Debug.Log("jager");
         if (!CzyStolJestPusty())
         {
             this.student.gameObject.SetActive(false);
