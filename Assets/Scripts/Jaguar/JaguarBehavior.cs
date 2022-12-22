@@ -10,7 +10,7 @@ public abstract class JaguarBehavior : MonoBehaviour
     private void Awake()
     {
         this.jaguar = GetComponent<Jaguar>();
-        this.enabled = false;
+        this.enabled = true; // zmienione z false co bylo na poczatku
     }
 
     public void Enable()
