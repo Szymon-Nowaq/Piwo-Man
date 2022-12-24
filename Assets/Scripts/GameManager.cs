@@ -42,6 +42,7 @@ public class GameManager : MonoBehaviour
             this.jaguary[i].gameObject.SetActive(true);
         this.student.gameObject.SetActive(true);
         FindObjectOfType<Student>().ResetStudent();
+        FindObjectOfType<JaguarNew>().ResetJaguar();
     }
     private void GameOver()
     {

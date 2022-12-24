@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class JaguarNew : MonoBehaviour
 {
@@ -11,17 +12,22 @@ public class JaguarNew : MonoBehaviour
     JaguarMode currentMode;
 
     public Transform student;
+    public Vector3Int homeCords;
     public Movement movement { get; private set; }
-    public Vector2 VDirection = Vector2.zero;
+    public Tilemap sciany;
+    public TileBase tilePoziomy, tileLacznik, tileZakretLewo, tileZakretPrawo;
+    public Vector2 VDirection = Vector2.zero, HomePosition;
     Node node;
     int index;
     public int pktPokonanieJaguara = 100;
-    public bool isOnNode = false;
     void Start()
     {
+        HomePosition = transform.position;
         currentMode = JaguarMode.Scatter;
         this.movement = GetComponent<Movement>();
         this.node = GetComponent<Node>();
+        homeCords = Vector3Int.FloorToInt(transform.position);
+        Invoke(nameof(ZamurujHome), 0.25f);
     }
 
     void Update()
@@ -56,10 +62,8 @@ public class JaguarNew : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("collider node jaguar");
         node = other.GetComponent<Node>();
         index = UnityEngine.Random.Range(0, node.availableDirection.Count);
-        //zeby ziomek se nie chodzi³ lewo prawo bo to dziwne lol
         if (node.availableDirection[index] == -movement.currentDirection && node.availableDirection.Count > 1)
         {
             index++;
@@ -68,8 +72,27 @@ public class JaguarNew : MonoBehaviour
                 index = 0;
             }
         }
-        isOnNode = true;
         VDirection = node.availableDirection[index];
-        //Debug.Log(VDirection);
+    }
+
+    public void ZamurujHome()
+    {
+        sciany.SetTile(homeCords + Vector3Int.up, tilePoziomy);
+        sciany.SetTile(homeCords + Vector3Int.up + Vector3Int.left, tileLacznik);
+        sciany.SetTile(homeCords + Vector3Int.up + Vector3Int.right, tileLacznik);
+    }
+
+    public void OdmurujHome()
+    {
+        sciany.SetTile(homeCords + Vector3Int.up, null);
+        sciany.SetTile(homeCords + Vector3Int.up + Vector3Int.left, tileZakretLewo);
+        sciany.SetTile(homeCords + Vector3Int.up + Vector3Int.right, tileZakretPrawo);
+    }
+
+    public void ResetJaguar()
+    {
+        this.movement.setDirection(Vector2.zero);
+        this.transform.position = HomePosition;
+        OdmurujHome();
     }
 }

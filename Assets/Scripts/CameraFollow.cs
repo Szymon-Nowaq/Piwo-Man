@@ -15,9 +15,9 @@ public class CameraFollow : MonoBehaviour
 
     void Update()
     {
-        if(MathF.Abs(student.position.x) <= 60)
+        if(MathF.Abs(student.position.x) <= 30)
             transform.position = new Vector3(student.position.x, transform.position.y, transform.position.z);
-        if (MathF.Abs(student.position.y) <= 25)
+        if (MathF.Abs(student.position.y) <= 12.5f)
             transform.position = new Vector3(transform.position.x, student.position.y, transform.position.z);
     }
 }
