@@ -35,12 +35,10 @@ public class Jaguar : MonoBehaviour
     {
         this.gameObject.SetActive(true);
         this.movement.ResetState();
-
         this.frightened.Disable();
         this.chase.Disable();
         this.scatter.Enable();
 
-        
         if(this.home != this.initialBehavior)
         {
             this.home.Disable();
@@ -57,7 +55,7 @@ public class Jaguar : MonoBehaviour
         {
             if (this.frightened.enabled)
             {
-                FindObjectOfType<GameManager>().JaguarPokonany(this);
+               // FindObjectOfType<GameManager>().JaguarPokonany(this);
             }else
             {
                 FindObjectOfType<GameManager>().StudentZgon();

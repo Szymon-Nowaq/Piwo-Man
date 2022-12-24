@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Movement : MonoBehaviour
+public class StudentMove : MonoBehaviour
 {
     public float speed = 8f;
     public float speedMultiplier = 1f;

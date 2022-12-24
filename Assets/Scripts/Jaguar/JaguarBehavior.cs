@@ -33,7 +33,4 @@ public abstract class JaguarBehavior : MonoBehaviour
 
         CancelInvoke();
     }
-
-    
-
 }
