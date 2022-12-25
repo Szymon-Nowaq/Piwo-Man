@@ -24,7 +24,7 @@ public class JaguarNew : MonoBehaviour
     void Start()
     {
         currentMode = JaguarMode.Random;
-        HomePosition = this.transform.position;
+        //HomePosition = this.transform.position;
         this.movement = GetComponent<Movement>();
         this.node = GetComponent<Node>();
         homeCords = Vector3Int.FloorToInt(transform.position);
@@ -131,8 +131,10 @@ public class JaguarNew : MonoBehaviour
     }
     public void ResetJaguar()
     {
+        movement.Stop();
         this.transform.position = HomePosition;
         OdmurujHome();
+        Invoke(nameof(ZamurujHome), 0.25f);
     }
     public void ZamurujHome()
     {
