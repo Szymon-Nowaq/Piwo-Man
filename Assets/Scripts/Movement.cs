@@ -15,7 +15,6 @@ public class Movement : MonoBehaviour
     public Vector2 currentDirection = Vector2.zero, buforDirection = Vector2.zero, nextDirection = Vector2.zero, initialDirection = Vector2.zero; // zmienna przechowujaca "kierunki"
     public LayerMask obstacleLayer;
     public Vector2 Vdirection = Vector2.zero;
-    public bool isGhost;
     public new Rigidbody2D rb { get; private set; }
     void Start()
     {
@@ -25,13 +24,13 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-            buforDirection = nextDirection;
-            if (!Occupied(buforDirection))
-            {
-                currentDirection = buforDirection;
-            }
-            if (Input.GetKeyDown(KeyCode.R))
-                Stop();
+        buforDirection = nextDirection;
+        if (!Occupied(buforDirection))
+        {
+            currentDirection = buforDirection;
+        }
+        if (Input.GetKeyDown(KeyCode.R))
+            Stop();
     }
 
     void FixedUpdate()

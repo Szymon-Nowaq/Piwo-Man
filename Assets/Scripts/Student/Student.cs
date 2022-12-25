@@ -32,7 +32,7 @@ public class Student : MonoBehaviour
     {
         transform.position = new Vector2(8.0f, 12.5f);
         transform.rotation = Quaternion.Euler(0, 0, 90.0f);
-        this.movement.Stop();
+        //movement.Stop();
         OdmurujPiwo();
     }
 

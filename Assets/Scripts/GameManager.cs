@@ -4,9 +4,10 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public JaguarNew[] jaguary;
-    public Transform student; // tutaj powinien byc typ Student, ale wtedy nie da siê dodac obiektu z poziomu unity do GM
+    public Student student; 
     public Transform alkohole;
-
+    public enum Level { easy, medium, hard };
+    public static Level level = Level.easy;
     public int score { get; private set; }
     public int lives { get; private set; }
     public int maxLives = 5;
@@ -39,10 +40,12 @@ public class GameManager : MonoBehaviour
     {
         ResetJaguarMultiplier();
         for (int i = 0; i < this.jaguary.Length; i++)
+        {
             this.jaguary[i].gameObject.SetActive(true);
+            FindObjectOfType<JaguarNew>().ResetJaguar(this.jaguary[i]);
+        }
         this.student.gameObject.SetActive(true);
-        FindObjectOfType<Student>().ResetStudent();
-        FindObjectOfType<JaguarNew>().ResetJaguar();
+        this.student.ResetStudent();
     }
     private void GameOver()
     {
@@ -70,6 +73,7 @@ public class GameManager : MonoBehaviour
     {
         SetScore(this.score + (jaguar.pktPokonanieJaguara * this.jaguarMultiplier));
         this.jaguarMultiplier++;
+        FindObjectOfType<JaguarNew>().SetHome(jaguar);
     }
 
     public void StudentZgon()
@@ -100,6 +104,7 @@ public class GameManager : MonoBehaviour
     public void WodkaWypita(Wodeczka wodka)
     {
         wodka.gameObject.SetActive(false);
+        FindObjectOfType<JaguarNew>().SetFrightened();
         if (!CzyStolJestPusty())
         {
             this.student.gameObject.SetActive(false);
