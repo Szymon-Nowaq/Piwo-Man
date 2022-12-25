@@ -228,16 +228,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3444c1a9190af45899ad3ca79795f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMode: 0
   student: {fileID: 1700191625}
-  homeCords: {x: 0, y: 0, z: 0}
   sciany: {fileID: 1933852562}
   tilePoziomy: {fileID: 11400000, guid: e67824c8436b2414fab415945178da84, type: 2}
   tileLacznik: {fileID: 11400000, guid: 0b42859100652fb449b602e76273da5e, type: 2}
-  tileZakretLewo: {fileID: 0}
-  tileZakretPrawo: {fileID: 0}
+  tileZakretLewo: {fileID: 11400000, guid: 223656941fd58fa4cbd89e88d6e25d4b, type: 2}
+  tileZakretPrawo: {fileID: 11400000, guid: 78b0eef488959b74e998ff971fe22610, type: 2}
   VDirection: {x: 0, y: 0}
-  HomePosition: {x: 0, y: 0}
+  HomePosition: {x: 0, y: 0, z: 0}
+  homeCords: {x: 0, y: 0, z: 0}
   pktPokonanieJaguara: 100
+  index: 0
+  EasyRndDur: 10
+  EasyChsDur: 10
+  MediumRndDur: 8
+  MediumChsDur: 12
+  HardRndDur: 6
+  HardChsDur: 14
 --- !u!114 &119676360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -259,7 +267,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Vdirection: {x: 0, y: 0}
-  isGhost: 1
 --- !u!114 &119676361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -516,16 +523,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3444c1a9190af45899ad3ca79795f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMode: 0
   student: {fileID: 1700191625}
-  homeCords: {x: 0, y: 0, z: 0}
   sciany: {fileID: 1933852562}
   tilePoziomy: {fileID: 11400000, guid: e67824c8436b2414fab415945178da84, type: 2}
   tileLacznik: {fileID: 11400000, guid: 0b42859100652fb449b602e76273da5e, type: 2}
-  tileZakretLewo: {fileID: 0}
-  tileZakretPrawo: {fileID: 0}
+  tileZakretLewo: {fileID: 11400000, guid: 223656941fd58fa4cbd89e88d6e25d4b, type: 2}
+  tileZakretPrawo: {fileID: 11400000, guid: 78b0eef488959b74e998ff971fe22610, type: 2}
   VDirection: {x: 0, y: 0}
-  HomePosition: {x: 0, y: 0}
+  HomePosition: {x: 0, y: 0, z: 0}
+  homeCords: {x: 0, y: 0, z: 0}
   pktPokonanieJaguara: 100
+  index: 0
+  EasyRndDur: 10
+  EasyChsDur: 10
+  MediumRndDur: 8
+  MediumChsDur: 12
+  HardRndDur: 6
+  HardChsDur: 14
 --- !u!114 &536275549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -547,7 +562,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Vdirection: {x: 0, y: 0}
-  isGhost: 1
 --- !u!114 &536275550
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -704,16 +718,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3444c1a9190af45899ad3ca79795f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMode: 0
   student: {fileID: 1700191625}
-  homeCords: {x: 0, y: 0, z: 0}
   sciany: {fileID: 1933852562}
   tilePoziomy: {fileID: 11400000, guid: e67824c8436b2414fab415945178da84, type: 2}
   tileLacznik: {fileID: 11400000, guid: 0b42859100652fb449b602e76273da5e, type: 2}
-  tileZakretLewo: {fileID: 0}
-  tileZakretPrawo: {fileID: 0}
+  tileZakretLewo: {fileID: 11400000, guid: 223656941fd58fa4cbd89e88d6e25d4b, type: 2}
+  tileZakretPrawo: {fileID: 11400000, guid: 78b0eef488959b74e998ff971fe22610, type: 2}
   VDirection: {x: 0, y: 0}
-  HomePosition: {x: 0, y: 0}
+  HomePosition: {x: 0, y: 0, z: 0}
+  homeCords: {x: 0, y: 0, z: 0}
   pktPokonanieJaguara: 100
+  index: 0
+  EasyRndDur: 10
+  EasyChsDur: 10
+  MediumRndDur: 8
+  MediumChsDur: 12
+  HardRndDur: 6
+  HardChsDur: 14
 --- !u!114 &552685120
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,7 +757,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Vdirection: {x: 0, y: 0}
-  isGhost: 1
 --- !u!114 &552685121
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1423,16 +1444,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3444c1a9190af45899ad3ca79795f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMode: 0
   student: {fileID: 1700191625}
-  homeCords: {x: 0, y: 0, z: 0}
   sciany: {fileID: 1933852562}
   tilePoziomy: {fileID: 11400000, guid: e67824c8436b2414fab415945178da84, type: 2}
   tileLacznik: {fileID: 11400000, guid: 0b42859100652fb449b602e76273da5e, type: 2}
-  tileZakretLewo: {fileID: 0}
-  tileZakretPrawo: {fileID: 0}
+  tileZakretLewo: {fileID: 11400000, guid: 223656941fd58fa4cbd89e88d6e25d4b, type: 2}
+  tileZakretPrawo: {fileID: 11400000, guid: 78b0eef488959b74e998ff971fe22610, type: 2}
   VDirection: {x: 0, y: 0}
-  HomePosition: {x: 0, y: 0}
+  HomePosition: {x: 0, y: 0, z: 0}
+  homeCords: {x: 0, y: 0, z: 0}
   pktPokonanieJaguara: 100
+  index: 0
+  EasyRndDur: 10
+  EasyChsDur: 10
+  MediumRndDur: 8
+  MediumChsDur: 12
+  HardRndDur: 6
+  HardChsDur: 14
 --- !u!114 &957322827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1454,7 +1483,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Vdirection: {x: 0, y: 0}
-  isGhost: 1
 --- !u!1 &1174504469
 GameObject:
   m_ObjectHideFlags: 0
@@ -1641,16 +1669,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3444c1a9190af45899ad3ca79795f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMode: 0
   student: {fileID: 1700191625}
-  homeCords: {x: 0, y: 0, z: 0}
   sciany: {fileID: 1933852562}
   tilePoziomy: {fileID: 11400000, guid: e67824c8436b2414fab415945178da84, type: 2}
   tileLacznik: {fileID: 11400000, guid: 0b42859100652fb449b602e76273da5e, type: 2}
-  tileZakretLewo: {fileID: 0}
-  tileZakretPrawo: {fileID: 0}
+  tileZakretLewo: {fileID: 11400000, guid: 223656941fd58fa4cbd89e88d6e25d4b, type: 2}
+  tileZakretPrawo: {fileID: 11400000, guid: 78b0eef488959b74e998ff971fe22610, type: 2}
   VDirection: {x: 0, y: 0}
-  HomePosition: {x: 0, y: 0}
+  HomePosition: {x: 0, y: 0, z: 0}
+  homeCords: {x: 0, y: 0, z: 0}
   pktPokonanieJaguara: 100
+  index: 0
+  EasyRndDur: 10
+  EasyChsDur: 10
+  MediumRndDur: 8
+  MediumChsDur: 12
+  HardRndDur: 6
+  HardChsDur: 14
 --- !u!114 &1348030516
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1672,7 +1708,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Vdirection: {x: 0, y: 0}
-  isGhost: 1
 --- !u!114 &1348030517
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1829,16 +1864,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3444c1a9190af45899ad3ca79795f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMode: 0
   student: {fileID: 1700191625}
-  homeCords: {x: 0, y: 0, z: 0}
   sciany: {fileID: 1933852562}
   tilePoziomy: {fileID: 11400000, guid: e67824c8436b2414fab415945178da84, type: 2}
   tileLacznik: {fileID: 11400000, guid: 0b42859100652fb449b602e76273da5e, type: 2}
-  tileZakretLewo: {fileID: 0}
-  tileZakretPrawo: {fileID: 0}
+  tileZakretLewo: {fileID: 11400000, guid: 223656941fd58fa4cbd89e88d6e25d4b, type: 2}
+  tileZakretPrawo: {fileID: 11400000, guid: 78b0eef488959b74e998ff971fe22610, type: 2}
   VDirection: {x: 0, y: 0}
-  HomePosition: {x: 0, y: 0}
+  HomePosition: {x: 0, y: 0, z: 0}
+  homeCords: {x: 0, y: 0, z: 0}
   pktPokonanieJaguara: 100
+  index: 0
+  EasyRndDur: 10
+  EasyChsDur: 10
+  MediumRndDur: 8
+  MediumChsDur: 12
+  HardRndDur: 6
+  HardChsDur: 14
 --- !u!114 &1392508364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1860,7 +1903,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Vdirection: {x: 0, y: 0}
-  isGhost: 1
 --- !u!114 &1392508365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11503,16 +11545,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3444c1a9190af45899ad3ca79795f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMode: 0
   student: {fileID: 1700191625}
-  homeCords: {x: 0, y: 0, z: 0}
   sciany: {fileID: 1933852562}
   tilePoziomy: {fileID: 11400000, guid: e67824c8436b2414fab415945178da84, type: 2}
   tileLacznik: {fileID: 11400000, guid: 0b42859100652fb449b602e76273da5e, type: 2}
   tileZakretLewo: {fileID: 11400000, guid: 223656941fd58fa4cbd89e88d6e25d4b, type: 2}
   tileZakretPrawo: {fileID: 11400000, guid: 78b0eef488959b74e998ff971fe22610, type: 2}
   VDirection: {x: 0, y: 0}
-  HomePosition: {x: 0, y: 0}
+  HomePosition: {x: 0, y: 0, z: 0}
+  homeCords: {x: 0, y: 0, z: 0}
   pktPokonanieJaguara: 100
+  index: 0
+  EasyRndDur: 10
+  EasyChsDur: 10
+  MediumRndDur: 8
+  MediumChsDur: 12
+  HardRndDur: 6
+  HardChsDur: 14
 --- !u!114 &1510978678
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11534,7 +11584,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Vdirection: {x: 0, y: 0}
-  isGhost: 1
 --- !u!114 &1510978679
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11772,7 +11821,6 @@ GameObject:
   - component: {fileID: 1700191623}
   - component: {fileID: 1700191622}
   - component: {fileID: 1700191626}
-  - component: {fileID: 1700191627}
   - component: {fileID: 1700191628}
   - component: {fileID: 1700191629}
   m_Layer: 6
@@ -11905,23 +11953,6 @@ MonoBehaviour:
   - {fileID: 21300000, guid: e3b83262a412c74408dba5cbe89f43f5, type: 3}
   animationTime: 0.25
   loop: 1
---- !u!114 &1700191627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1700191620}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f694636418559b34ea858873ff8cb4cc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sciany: {fileID: 1933852562}
-  tilePoziomy: {fileID: 11400000, guid: e67824c8436b2414fab415945178da84, type: 2}
-  tileZakretPrawo: {fileID: 11400000, guid: 78b0eef488959b74e998ff971fe22610, type: 2}
-  tileZakretLewo: {fileID: 11400000, guid: 223656941fd58fa4cbd89e88d6e25d4b, type: 2}
-  homeCords: {x: 0, y: 0, z: 0}
 --- !u!114 &1700191628
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11943,7 +11974,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Vdirection: {x: 0, y: 0}
-  isGhost: 0
 --- !u!114 &1700191629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11960,6 +11990,7 @@ MonoBehaviour:
   tilePoziomy: {fileID: 11400000, guid: e67824c8436b2414fab415945178da84, type: 2}
   tileZakretPrawo: {fileID: 11400000, guid: 78b0eef488959b74e998ff971fe22610, type: 2}
   tileZakretLewo: {fileID: 11400000, guid: 223656941fd58fa4cbd89e88d6e25d4b, type: 2}
+  student: {fileID: 1700191629}
   homeCords: {x: 0, y: 0, z: 0}
 --- !u!1 &1865379857
 GameObject:
@@ -41159,16 +41190,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3444c1a9190af45899ad3ca79795f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMode: 0
   student: {fileID: 1700191625}
-  homeCords: {x: 0, y: 0, z: 0}
   sciany: {fileID: 1933852562}
   tilePoziomy: {fileID: 11400000, guid: e67824c8436b2414fab415945178da84, type: 2}
   tileLacznik: {fileID: 11400000, guid: 0b42859100652fb449b602e76273da5e, type: 2}
-  tileZakretLewo: {fileID: 0}
-  tileZakretPrawo: {fileID: 0}
+  tileZakretLewo: {fileID: 11400000, guid: 223656941fd58fa4cbd89e88d6e25d4b, type: 2}
+  tileZakretPrawo: {fileID: 11400000, guid: 78b0eef488959b74e998ff971fe22610, type: 2}
   VDirection: {x: 0, y: 0}
-  HomePosition: {x: 0, y: 0}
+  HomePosition: {x: 0, y: 0, z: 0}
+  homeCords: {x: 0, y: 0, z: 0}
   pktPokonanieJaguara: 100
+  index: 0
+  EasyRndDur: 10
+  EasyChsDur: 10
+  MediumRndDur: 8
+  MediumChsDur: 12
+  HardRndDur: 6
+  HardChsDur: 14
 --- !u!114 &1978944278
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41190,7 +41229,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Vdirection: {x: 0, y: 0}
-  isGhost: 1
 --- !u!114 &1978944279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41423,16 +41461,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3444c1a9190af45899ad3ca79795f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentMode: 0
   student: {fileID: 1700191625}
-  homeCords: {x: 0, y: 0, z: 0}
   sciany: {fileID: 1933852562}
   tilePoziomy: {fileID: 11400000, guid: e67824c8436b2414fab415945178da84, type: 2}
   tileLacznik: {fileID: 11400000, guid: 0b42859100652fb449b602e76273da5e, type: 2}
-  tileZakretLewo: {fileID: 0}
-  tileZakretPrawo: {fileID: 0}
+  tileZakretLewo: {fileID: 11400000, guid: 223656941fd58fa4cbd89e88d6e25d4b, type: 2}
+  tileZakretPrawo: {fileID: 11400000, guid: 78b0eef488959b74e998ff971fe22610, type: 2}
   VDirection: {x: 0, y: 0}
-  HomePosition: {x: 0, y: 0}
+  HomePosition: {x: 0, y: 0, z: 0}
+  homeCords: {x: 0, y: 0, z: 0}
   pktPokonanieJaguara: 100
+  index: 0
+  EasyRndDur: 10
+  EasyChsDur: 10
+  MediumRndDur: 8
+  MediumChsDur: 12
+  HardRndDur: 6
+  HardChsDur: 14
 --- !u!114 &2054386174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -41454,7 +41500,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   Vdirection: {x: 0, y: 0}
-  isGhost: 1
 --- !u!114 &2054386175
 MonoBehaviour:
   m_ObjectHideFlags: 0

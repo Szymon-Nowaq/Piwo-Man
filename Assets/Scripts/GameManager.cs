@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
     public JaguarNew[] jaguary;
     public Student student; 
     public Transform alkohole;
+    public Movement movement { get; private set; }
     public enum Level { easy, medium, hard };
     public static Level level = Level.easy;
     public int score { get; private set; }
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        movement = GetComponent<Movement>();
         if ((lives <= 0 && Input.anyKeyDown) || Input.GetKeyDown(KeyCode.R))
         {
             NewGame();
