@@ -16,27 +16,28 @@ public class JaguarNew : MonoBehaviour
     Node node;
     public Tilemap sciany;
     public TileBase tilePoziomy, tileLacznik, tileZakretLewo, tileZakretPrawo;
-    public Vector2 VDirection = Vector2.zero, HomePosition;
+    public Vector2 VDirection = Vector2.zero;
+    public Vector3 HomePosition;
     public Vector3Int homeCords;
-    public int pktPokonanieJaguara = 100, index, EasyRndDur = 10, EasyChsDur = 10, MediumRndDur = 8, MediumChsDur = 12, HardRndDur = 6, HardChsDur = 14;
-    public bool active = true;
+    public int pktPokonanieJaguara = 100, index;
+    public float EasyRndDur = 10.0f, EasyChsDur = 10.0f, MediumRndDur = 8.0f, MediumChsDur = 12.0f, HardRndDur = 6.0f, HardChsDur = 14.0f;
     void Start()
     {
-        HomePosition = transform.position;
+        currentMode = JaguarMode.Random;
+        HomePosition = this.transform.position;
         this.movement = GetComponent<Movement>();
         this.node = GetComponent<Node>();
         homeCords = Vector3Int.FloorToInt(transform.position);
         Invoke(nameof(ZamurujHome), 0.25f);
+        Invoke(nameof(SetChase), EasyRndDur);
     }
-
-    void Update()
+    private void Update()
     {
-        if (active)
-        {
-            movement.setDirection(VDirection);
-            if (currentMode == JaguarMode.Random || currentMode == JaguarMode.Chase)
-                LoopMode();
-        }
+       
+    }
+    void FixedUpdate()
+    {
+        movement.setDirection(VDirection);
     }
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -64,24 +65,42 @@ public class JaguarNew : MonoBehaviour
         {
             case JaguarMode.Random:
                 index = UnityEngine.Random.Range(0, node.availableDirection.Count);
-                if (node.availableDirection[index] == -movement.currentDirection && node.availableDirection.Count > 1)
-                {
-                    index++;
-                    if (index >= node.availableDirection.Count)
-                    {
-                        index = 0;
-                    }
-                }
                 break;
             case JaguarMode.Chase:
-                index = distancesToStudent.IndexOf(distancesToStudent.Min());
+                int minI = 0;
+                for(int i = 1; i < node.availableDirection.Count; i++)
+                {
+                    if (distancesToStudent[i] < distancesToStudent[minI])
+                        minI = i;
+                }
+                index = minI;
                 break;
             case JaguarMode.Frightened:
-                index = distancesToStudent.IndexOf(distancesToStudent.Max());
+                int maxI = 0;
+                for (int i = 1; i < node.availableDirection.Count; i++)
+                {
+                    if (distancesToStudent[i] > distancesToStudent[maxI])
+                        maxI = i;
+                }
+                index = maxI;
                 break;
             case JaguarMode.Home:
-                index = distancesToHome.IndexOf(distancesToHome.Min());
+                int minIH = 0;
+                for (int i = 1; i < node.availableDirection.Count; i++)
+                {
+                    if (distancesToHome[i] < distancesToStudent[minIH])
+                        minIH = i;
+                }
+                index = minIH;
                 break;
+        }
+        if (node.availableDirection[index] == -movement.currentDirection && node.availableDirection.Count > 1)
+        {
+            index++;
+            if (index >= node.availableDirection.Count)
+            {
+                index = 0;
+            }
         }
         VDirection = node.availableDirection[index];
     }
@@ -91,25 +110,28 @@ public class JaguarNew : MonoBehaviour
     //hard: random - 6s, chase - 14s
     public void LoopMode()
     {
-        switch(GameManager.level)
+        if(this.currentMode == JaguarMode.Random || this.currentMode == JaguarMode.Chase)
         {
-            case GameManager.Level.easy:
-                Invoke(nameof(SetChase), EasyRndDur);
-                Invoke(nameof(SetRandom), EasyChsDur);
-                break;
-            case GameManager.Level.medium:
-                Invoke(nameof(SetChase), MediumRndDur);
-                Invoke(nameof(SetRandom), MediumChsDur);
-                break;
-            case GameManager.Level.hard:
-                Invoke(nameof(SetChase), HardRndDur);
-                Invoke(nameof(SetRandom), HardChsDur);
-                break;
+            switch (GameManager.level)
+            {
+                case GameManager.Level.easy:
+                    Invoke(nameof(SetChase), EasyRndDur);
+                    Invoke(nameof(SetRandom), EasyChsDur);
+                    break;
+                case GameManager.Level.medium:
+                    Invoke(nameof(SetChase), MediumRndDur);
+                    Invoke(nameof(SetRandom), MediumChsDur);
+                    break;
+                case GameManager.Level.hard:
+                    Invoke(nameof(SetChase), HardRndDur);
+                    Invoke(nameof(SetRandom), HardChsDur);
+                    break;
+            }
         }
     }
-    public void ResetJaguar(JaguarNew jaguar)
+    public void ResetJaguar()
     {
-        this.transform.position = jaguar.HomePosition;
+        this.transform.position = HomePosition;
         OdmurujHome();
     }
     public void ZamurujHome()
@@ -128,19 +150,43 @@ public class JaguarNew : MonoBehaviour
 
     public void SetChase()
     {
-        currentMode = JaguarMode.Chase;
+        this.currentMode = JaguarMode.Chase;
+        switch (GameManager.level)
+        {
+            case GameManager.Level.easy:
+                Invoke(nameof(SetRandom), EasyChsDur);
+                break;
+            case GameManager.Level.medium:
+                Invoke(nameof(SetRandom), MediumChsDur);
+                break;
+            case GameManager.Level.hard:
+                Invoke(nameof(SetRandom), HardChsDur);
+                break;
+        }
     }
     public void SetRandom()
     {
-        currentMode = JaguarMode.Random;
+        this.currentMode = JaguarMode.Random;
+        switch (GameManager.level)
+        {
+            case GameManager.Level.easy:
+                Invoke(nameof(SetChase), EasyRndDur);
+                break;
+            case GameManager.Level.medium:
+                Invoke(nameof(SetChase), MediumRndDur);
+                break;
+            case GameManager.Level.hard:
+                Invoke(nameof(SetChase), HardRndDur);
+                break;
+        }
     }
-    public void SetHome(JaguarNew jaguar)
+    public void SetHome()
     {
-        jaguar.currentMode = JaguarMode.Home;
+        this.currentMode = JaguarMode.Home;
     }
     public void SetFrightened()
     {
-        currentMode = JaguarMode.Frightened;
+        this.currentMode = JaguarMode.Frightened;
     }
 
 }

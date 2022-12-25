@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         for (int i = 0; i < this.jaguary.Length; i++)
         {
             this.jaguary[i].gameObject.SetActive(true);
-            FindObjectOfType<JaguarNew>().ResetJaguar(this.jaguary[i]);
+            jaguary[i].ResetJaguar();
         }
         this.student.gameObject.SetActive(true);
         this.student.ResetStudent();
@@ -73,7 +73,7 @@ public class GameManager : MonoBehaviour
     {
         SetScore(this.score + (jaguar.pktPokonanieJaguara * this.jaguarMultiplier));
         this.jaguarMultiplier++;
-        FindObjectOfType<JaguarNew>().SetHome(jaguar);
+        jaguar.SetHome();
     }
 
     public void StudentZgon()

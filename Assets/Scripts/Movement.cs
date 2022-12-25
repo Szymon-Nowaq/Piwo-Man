@@ -36,10 +36,6 @@ public class Movement : MonoBehaviour
     void FixedUpdate()
     {
         rb.MovePosition(rb.position + currentDirection * Time.fixedDeltaTime * speed);
-                //transform.rotation = Quaternion.Euler(0, 0, 180.0f);   
-               // transform.rotation = Quaternion.Euler(0, 0, 0);
-              //  transform.rotation = Quaternion.Euler(0, 0, 90.0f);
-              //  transform.rotation = Quaternion.Euler(0, 0, 270.0f);
     }
 
     public void setDirection(Vector2 fromInput)
