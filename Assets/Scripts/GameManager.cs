@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
         {
             NewGame();
         }
+        if (Input.GetKeyDown(KeyCode.K))
+            StudentZgon();
     }
     private void NewGame()
     {
@@ -73,7 +75,6 @@ public class GameManager : MonoBehaviour
 
     public void JaguarPokonany(JaguarNew jaguar)
     {
-        SetScore(this.score + (jaguar.pktPokonanieJaguara * this.jaguarMultiplier));
         this.jaguarMultiplier++;
         jaguar.SetHome();
     }
@@ -83,13 +84,9 @@ public class GameManager : MonoBehaviour
         this.student.gameObject.SetActive(false);
         SetLives(this.lives - 1);
         if (this.lives > 0)
-        {
             Invoke(nameof(ResetState), 5);
-        }
         else
-        {
             GameOver();
-        }
     }
 
     public void PiwoWypite(Piwko piwo)
@@ -106,7 +103,8 @@ public class GameManager : MonoBehaviour
     public void WodkaWypita(Wodeczka wodka)
     {
         wodka.gameObject.SetActive(false);
-        FindObjectOfType<JaguarNew>().SetFrightened();
+        for (int i = 0; i < this.jaguary.Length; i++)
+            this.jaguary[i].SetFrightened();
         if (!CzyStolJestPusty())
         {
             this.student.gameObject.SetActive(false);

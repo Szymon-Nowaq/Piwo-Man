@@ -36,30 +36,10 @@ public class Student : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 90.0f);
         if (movement.currentDirection == Vector2.down)
             transform.rotation = Quaternion.Euler(0, 0, 270.0f);
-        if (transform.position.y > 14.4);
-           // ZamurujPiwo();
     }
     public void ResetStudent()
     {
         transform.position = new Vector2(8.0f, 12.5f);
         transform.rotation = Quaternion.Euler(0, 0, 90.0f);
-        //movement.setDirection(Vector2.zero);
-        //OdmurujPiwo();
     }
-    /*
-    public void ZamurujPiwo()
-    {
-        sciany.SetTile(homeCords + Vector3Int.up, tilePoziomy);
-        sciany.SetTile(homeCords + Vector3Int.up + Vector3Int.right, tilePoziomy);
-        sciany.SetTile(homeCords + Vector3Int.up + Vector3Int.left, tilePoziomy);
-        sciany.SetTile(homeCords + Vector3Int.up + Vector3Int.left + Vector3Int.left, tilePoziomy);
-    }
-    public void OdmurujPiwo()
-    {
-        Debug.Log("chuj");
-        sciany.SetTile(homeCords + Vector3Int.up, null);
-        sciany.SetTile(homeCords + Vector3Int.up + Vector3Int.right, tileZakretPrawo);
-        sciany.SetTile(homeCords + Vector3Int.up + Vector3Int.left, null);
-        sciany.SetTile(homeCords + Vector3Int.up + Vector3Int.left + Vector3Int.left, tileZakretLewo);
-    }*/
 }

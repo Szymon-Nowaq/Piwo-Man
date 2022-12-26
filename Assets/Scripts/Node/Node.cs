@@ -16,7 +16,6 @@ public class Node : MonoBehaviour
         CheckAvailableDirections(Vector2.down);
         CheckAvailableDirections(Vector2.left);
         CheckAvailableDirections(Vector2.right);
-        Debug.Log(availableDirection.Count);
     }
 
     private void CheckAvailableDirections(Vector2 direction)

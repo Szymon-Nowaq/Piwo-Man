@@ -54,5 +54,10 @@ public class Movement : MonoBehaviour
         buforDirection = Vector2.zero;
         nextDirection = Vector2.zero;
     }
+
+    public void SetSpeed(float newSpeed)
+    {
+        speed = newSpeed;
+    }
 }
 
