@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
     public Transform alkohole;
     public Movement movement { get; private set; }
     public enum Level { easy, medium, hard };
-    public static Level level = Level.easy;
+    public static Level level = Level.hard;
     public int score { get; private set; }
     public int lives { get; private set; }
     public int maxLives = 5;

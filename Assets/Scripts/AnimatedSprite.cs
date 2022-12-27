@@ -1,4 +1,5 @@
 using UnityEngine;
+using static JaguarNew;
 
 [RequireComponent(typeof(SpriteRenderer))]
 public class AnimatedSprite : MonoBehaviour
@@ -7,7 +8,7 @@ public class AnimatedSprite : MonoBehaviour
     public Sprite[] sprites; // tablica animacji, dlugosc i zawartosc ustalamy przez unity, jak nam sie bedzie chcialo pobawic to mozna ja zrobic bardziej smooth
     public float animationTime = 0.25f; // co ile bedzie zmiana animacji
     public int animationFrame {get; private set;} // indeksy tablicy
-    public bool loop = true; // czy chcemy aby animacja byla w petli
+    public bool loop = true, isJagFri = false; // czy chcemy aby animacja byla w petli
     private void Awake()
     {
         this.spriteRenderer = GetComponent<SpriteRenderer>(); // nwm co to hindus kaza³
@@ -25,8 +26,19 @@ public class AnimatedSprite : MonoBehaviour
         this.animationFrame++; // zmiana sprita
         if(this.animationFrame >= this.sprites.Length && this.loop) // jak dojdziemy do konca tablicy i animacja zapetlona to zaczynamy od zera
             this.animationFrame = 0;
-        if (this.animationFrame >= 0 && this.animationFrame < this.sprites.Length) // czy indeks jest git
-            this.spriteRenderer.sprite = this.sprites[this.animationFrame]; // podmiana z ustalonej tablicy do componentu "sprite renderer" i komórki "sprite" ³adnie to widac w unity
+        if (!isJagFri)
+        {
+            if (this.animationFrame >= 0 && this.animationFrame < this.sprites.Length) // czy indeks jest git
+                this.spriteRenderer.sprite = this.sprites[this.animationFrame];
+        }// podmiana z ustalonej tablicy do componentu "sprite renderer" i komórki "sprite" ³adnie to widac w unity
+        else
+        {
+            if (this.animationFrame >= 0 && this.animationFrame < this.sprites.Length) // czy indeks jest git
+                if(animationFrame%2 == 0)
+                    this.spriteRenderer.sprite = this.sprites[this.animationFrame];
+                else
+                    this.spriteRenderer.sprite = null;
+        }
     }
 
     private void Restart()

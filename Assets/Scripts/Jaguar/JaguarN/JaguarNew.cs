@@ -6,38 +6,36 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-[RequireComponent(typeof(CircleCollider2D))]
 
 public class JaguarNew : MonoBehaviour
 {
     public enum JaguarMode { Random, Chase, Frightened, Home }
     public JaguarMode currentMode;
     public Student student;
-    //public CircleCollider2D circleCollider;
     public Movement movement { get; private set; }
+    public AnimatedSprite animation { get; private set; }
     Node node;
     public Tilemap nodes, sciany;
     public TileBase tileNode, tileBlack;
     public Vector2 VDirection = Vector2.zero, VbeforeDirection;
-    public Vector3 HomePosition;
+    public Vector3 HomePosition, vd3;
     public Vector3Int homeCords;
-    public Vector2[] tabVector = { Vector2.down, Vector2.left, Vector2.right, Vector2.up };
-    public int index;
-    public float easyRndDur = 10.0f, easyChsDur = 10.0f, mediumRndDur = 8.0f, mediumChsDur = 12.0f, hardRndDur = 6.0f, hardChsDur = 14.0f, normalSpeed = 6.5f, homeSpeed = 20.0f;
+    public Vector2[] tabVector = { Vector2.right, Vector2.left, Vector2.down, Vector2.up };
+    public int index, idx = 1;
+    public float easyRndDur = 5.0f, easyChsDur = 5.0f, mediumRndDur = 4.0f, mediumChsDur = 6.0f, hardRndDur = 3.0f, hardChsDur = 7.0f, normalSpeed = 6.5f, homeSpeed = 3.0f;
     void Start()
     {
         VDirection = Vector2.up;
         this.movement = GetComponent<Movement>();
         this.node = GetComponent<Node>();
-        //this.circleCollider = GetComponent<CircleCollider2D>();
+        this.animation = GetComponent<AnimatedSprite>();
     }
     void Update()
     {
-        if (currentMode == JaguarMode.Home && isNextHome())
-        {
-            VDirection = Vector2.down;
-            Invoke(nameof(Freeze), 0.3f);
-        }
+        if (currentMode == JaguarMode.Home)
+            isNextHome();
+        vd3 = VDirection;
+            
     }
     void FixedUpdate()
     {
@@ -56,9 +54,14 @@ public class JaguarNew : MonoBehaviour
         if (collision.gameObject.layer == LayerMask.NameToLayer("Student"))
         {
             if (currentMode == JaguarMode.Frightened)
+            {
+                animation.isJagFri = false;
                 FindObjectOfType<GameManager>().JaguarPokonany(this);
-            else if (currentMode != JaguarMode.Home)  
+            }
+            else if (currentMode != JaguarMode.Home)
                 FindObjectOfType<GameManager>().StudentZgon();
+            else
+                transform.position = transform.position + vd3;
         }
 
     }
@@ -122,26 +125,15 @@ public class JaguarNew : MonoBehaviour
     //hard: random - 6s, chase - 14s
     public void ResetJaguar()
     {
+        StopAllCoroutines();
+        Invoke(nameof(Setnormalspeed),0.1f);
         currentMode = JaguarMode.Random;
-        CancelInvoke();
+        Invoke(nameof(SetRandom), 0.1f);
         this.transform.position = HomePosition;
-        VDirection = Vector2.up;
-        while (transform.position.y < 25)
-            ;
-        CreateNodes();
-        Invoke(nameof(DestroyNodes), 0.2f);
-        Invoke(nameof(SetChase), easyChsDur);
-    }
-    public void DestroyNodes()
-    {
-        nodes.SetTile(homeCords + 2 * Vector3Int.up, null);
-        CreateBlocks();
-    }
-
-    public void CreateNodes()
-    {
         DestroyBlocks();
-        nodes.SetTile(homeCords + 2 * Vector3Int.up, tileNode);
+        VDirection = Vector2.up;
+        Invoke(nameof(SetDirectionLR), 0.3f);
+        Invoke(nameof(CreateBlocks), 0.5f);
     }
 
     public void CreateBlocks()
@@ -172,6 +164,8 @@ public class JaguarNew : MonoBehaviour
     }
     public void SetRandom()
     {
+        animation.isJagFri = false;
+        this.currentMode = JaguarMode.Random;
         this.movement.SetSpeed(normalSpeed);
         switch (GameManager.level)
         {
@@ -194,6 +188,8 @@ public class JaguarNew : MonoBehaviour
             for (; this.movement.Occupied(tabVector[i]); i++)
                 ;
             VDirection = tabVector[i];
+            vd3 = tabVector[i];
+            transform.position = transform.position + vd3;
         }
         else
             VDirection = student.movement.currentDirection;
@@ -209,6 +205,7 @@ public class JaguarNew : MonoBehaviour
         CancelInvoke(nameof(SetChase));
         CancelInvoke(nameof(SetRandom));
         this.currentMode = JaguarMode.Frightened;
+        animation.isJagFri = true;
         this.movement.SetSpeed(4);
         Invoke(nameof(SetRandom), 15.0f);
     }
@@ -217,7 +214,13 @@ public class JaguarNew : MonoBehaviour
     {
         int x = homeCords.x, y = homeCords.y + 2;
         if ((x - 1 <= transform.position.x && transform.position.x <= x + 2) && (y <= transform.position.y && transform.position.y <= y + 1))
+        {
+            transform.position = HomePosition;
+            VDirection = Vector2.zero;
+            this.movement.SetSpeed(normalSpeed);
+            Invoke(nameof(ResetJaguar), 10);
             return true;
+        }
         return false;
     }
 
@@ -226,19 +229,18 @@ public class JaguarNew : MonoBehaviour
         int x1 = 4, x2 =30, y = 25;
         if (((x1 - 1 <= transform.position.x && transform.position.x <= x1 + 1) && (y <= transform.position.y && transform.position.y <= y + 1)) ||
             ((x2 - 1 <= transform.position.x && transform.position.x <= x2 + 1) && (y <= transform.position.y && transform.position.y <= y + 1)))
+        {
             return true;
+        }
         return false;
     }
 
-    public void Freeze()
-    {
-        VDirection = Vector2.zero;
-        this.movement.SetSpeed(normalSpeed);
-        Invoke(nameof(UnFreeze), 10);
+    public void SetDirectionLR()
+    { 
+        VDirection = tabVector[idx];
     }
-
-    public void UnFreeze()
+    public void Setnormalspeed()
     {
-        ResetJaguar();
+        this.movement.SetSpeed(normalSpeed);
     }
 }
