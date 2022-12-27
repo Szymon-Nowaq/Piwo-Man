@@ -22,7 +22,7 @@ public class JaguarNew : MonoBehaviour
     public Vector3Int homeCords;
     public Vector2[] tabVector = { Vector2.right, Vector2.left, Vector2.down, Vector2.up };
     public int index, idx = 1;
-    public float easyRndDur = 5.0f, easyChsDur = 5.0f, mediumRndDur = 4.0f, mediumChsDur = 6.0f, hardRndDur = 3.0f, hardChsDur = 7.0f, normalSpeed = 6.5f, homeSpeed = 3.0f;
+    public float easyRndDur = 4.0f, easyChsDur = 1.0f, mediumRndDur = 2.0f, mediumChsDur = 2.0f, hardRndDur = 2.0f, hardChsDur = 3.0f, normalSpeed = 6.5f, homeSpeed = 3.0f;
     void Start()
     {
         VDirection = Vector2.up;
@@ -98,6 +98,8 @@ public class JaguarNew : MonoBehaviour
                             maxI = i;
                     }
                     index = maxI;
+                    if (distancesToStudent[maxI] > 10)
+                        index = UnityEngine.Random.Range(0, node.availableDirection.Count);
                     break;
                 case JaguarMode.Home:
                     int minIH = 0;
@@ -204,10 +206,13 @@ public class JaguarNew : MonoBehaviour
     {
         CancelInvoke(nameof(SetChase));
         CancelInvoke(nameof(SetRandom));
-        this.currentMode = JaguarMode.Frightened;
-        animation.isJagFri = true;
-        this.movement.SetSpeed(4);
-        Invoke(nameof(SetRandom), 15.0f);
+        if (this.currentMode != JaguarMode.Home)
+        {
+            this.currentMode = JaguarMode.Frightened;
+            animation.isJagFri = true;
+            this.movement.SetSpeed(4);
+            Invoke(nameof(SetRandom), 10.0f);
+        }
     }
 
     public bool isNextHome()

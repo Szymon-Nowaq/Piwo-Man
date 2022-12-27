@@ -9,11 +9,10 @@ public class Student : MonoBehaviour
     public Tilemap sciany;
     public Tile tilePoziomy, tileZakretPrawo, tileZakretLewo;
     public Student student;
-    public Vector3Int homeCords;
+    public Vector3 homeCords;
     void Start()
     {
         movement = GetComponent<Movement>();
-        homeCords = Vector3Int.FloorToInt(transform.position);
     }
 
     void FixedUpdate()
@@ -36,10 +35,18 @@ public class Student : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 90.0f);
         if (movement.currentDirection == Vector2.down)
             transform.rotation = Quaternion.Euler(0, 0, 270.0f);
+        if (movement.currentDirection != Vector2.zero)
+            GameManager.DistancePlus();
     }
     public void ResetStudent()
     {
         transform.position = new Vector2(8.0f, 12.5f);
         transform.rotation = Quaternion.Euler(0, 0, 90.0f);
+        Invoke(nameof(Stop), 0.1f);
+    }
+    
+    public void Stop()
+    {
+        this.movement.Stop();
     }
 }

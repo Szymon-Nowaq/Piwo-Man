@@ -1,18 +1,23 @@
+using Microsoft.Unity.VisualStudio.Editor;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public JaguarNew[] jaguary;
     public Student student; 
     public Transform alkohole;
+    public GameObject gameOver, win;
+    public Time gameTime;
     public Movement movement { get; private set; }
     public enum Level { easy, medium, hard };
     public static Level level = Level.hard;
     public int score { get; private set; }
     public int lives { get; private set; }
     public int maxLives = 5;
-    public int jaguarMultiplier { get; private set; } = 1;
+    public static int statsDeaths = 0, statsKilled = 0, statsBeers = 0 ;
+    public static float statsDistance = 0;
+    public bool gameOverbool = false;
     private void Start()
     {
         NewGame();
@@ -20,15 +25,24 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         movement = GetComponent<Movement>();
-        if ((lives <= 0 && Input.anyKeyDown) || Input.GetKeyDown(KeyCode.R))
+        if ((gameOverbool && Input.GetKey(KeyCode.N)) || Input.GetKeyDown(KeyCode.R))
         {
             NewGame();
         }
+        if (gameOverbool && Input.GetKey(KeyCode.Escape))
+            SceneManager.LoadScene("Menu");
         if (Input.GetKeyDown(KeyCode.K))
             StudentZgon();
     }
     private void NewGame()
     {
+        gameOverbool = false;
+        gameOver.SetActive(false);
+        win.SetActive(false);
+        statsDeaths = 0; 
+        statsKilled = 0;
+        statsDistance = 0; 
+        statsBeers = 0;
         SetLives(5);
         SetScore(0);
         NewRound();
@@ -42,7 +56,7 @@ public class GameManager : MonoBehaviour
 
     private void ResetState()
     {
-        ResetJaguarMultiplier();
+        FindObjectOfType<CameraFollow>().ResetCamera();
         for (int i = 0; i < this.jaguary.Length; i++)
         {
             this.jaguary[i].gameObject.SetActive(true);
@@ -53,11 +67,15 @@ public class GameManager : MonoBehaviour
     }
     private void GameOver()
     {
+        statsDistance = statsDistance * Time.fixedDeltaTime * student.movement.speed;
+        Debug.Log(statsDistance);
         foreach (Transform alkohol in this.alkohole)
             alkohol.gameObject.SetActive(false);
         for (int i = 0; i < this.jaguary.Length; i++)
             this.jaguary[i].gameObject.SetActive(false);
         this.student.gameObject.SetActive(false);
+        gameOver.SetActive(true);
+        Invoke(nameof(gameOverBool), 1);
     }
     private void SetScore(int newScore)
     {
@@ -75,12 +93,13 @@ public class GameManager : MonoBehaviour
 
     public void JaguarPokonany(JaguarNew jaguar)
     {
-        this.jaguarMultiplier++;
+        statsKilled++;
         jaguar.SetHome();
     }
 
     public void StudentZgon()
     {
+        statsDeaths++;
         this.student.gameObject.SetActive(false);
         SetLives(this.lives - 1);
         if (this.lives > 0)
@@ -91,12 +110,14 @@ public class GameManager : MonoBehaviour
 
     public void PiwoWypite(Piwko piwo)
     {
+        statsBeers++;
         piwo.gameObject.SetActive(false);
         SetScore(this.score + piwo.points);
         if (!CzyStolJestPusty())
         {
             this.student.gameObject.SetActive(false);
-            Invoke(nameof(NewRound), 4.0f);
+            win.SetActive(true);
+            Invoke(nameof(gameOverBool), 1);
         }
     }
 
@@ -108,10 +129,9 @@ public class GameManager : MonoBehaviour
         if (!CzyStolJestPusty())
         {
             this.student.gameObject.SetActive(false);
-            Invoke(nameof(NewRound), 4.0f);
+            win.SetActive(true);
+            Invoke(nameof(gameOverBool), 1);
         }
-        CancelInvoke();
-        Invoke(nameof(ResetJaguarMultiplier), 8.0f);
     }
 
     public void JagerWypity(Jager jager)
@@ -122,7 +142,8 @@ public class GameManager : MonoBehaviour
         if (!CzyStolJestPusty())
         {
             this.student.gameObject.SetActive(false);
-            Invoke(nameof(NewRound), 4.0f);
+            win.SetActive(true);
+            Invoke(nameof(gameOverBool), 1);
         }
     }
 
@@ -135,8 +156,14 @@ public class GameManager : MonoBehaviour
         }
         return false;
     }
-    private void ResetJaguarMultiplier()
+
+    public void gameOverBool()
     {
-        jaguarMultiplier = 1;
+        gameOverbool = true;
+    }
+
+    public static void DistancePlus()
+    {
+        statsDistance++;
     }
 }

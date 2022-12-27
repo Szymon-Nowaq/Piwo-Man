@@ -5,9 +5,11 @@ using static JaguarNew;
 public class AnimatedSprite : MonoBehaviour
 {
     public SpriteRenderer spriteRenderer { get; private set; } // zmienna ktora przechowuje sprity, typ nazywa sie tak samo jak component
-    public Sprite[] sprites; // tablica animacji, dlugosc i zawartosc ustalamy przez unity, jak nam sie bedzie chcialo pobawic to mozna ja zrobic bardziej smooth
+    public Sprite[] sprites;
+    public Sprite white;// tablica animacji, dlugosc i zawartosc ustalamy przez unity, jak nam sie bedzie chcialo pobawic to mozna ja zrobic bardziej smooth
     public float animationTime = 0.25f; // co ile bedzie zmiana animacji
     public int animationFrame {get; private set;} // indeksy tablicy
+    public int i = 1;
     public bool loop = true, isJagFri = false; // czy chcemy aby animacja byla w petli
     private void Awake()
     {
@@ -33,11 +35,23 @@ public class AnimatedSprite : MonoBehaviour
         }// podmiana z ustalonej tablicy do componentu "sprite renderer" i komórki "sprite" ³adnie to widac w unity
         else
         {
+            if (i == 2)
+                i = 1;
             if (this.animationFrame >= 0 && this.animationFrame < this.sprites.Length) // czy indeks jest git
-                if(animationFrame%2 == 0)
-                    this.spriteRenderer.sprite = this.sprites[this.animationFrame];
+                if (i == 1)
+                {
+                    if (((animationFrame + 1) % 2) == 0)
+                        this.spriteRenderer.sprite = this.white;
+                    else
+                        this.spriteRenderer.sprite = null;
+                }
                 else
-                    this.spriteRenderer.sprite = null;
+                {
+                    if (((animationFrame + 1) % 2) == 1)
+                        this.spriteRenderer.sprite = this.white;
+                    else
+                        this.spriteRenderer.sprite = null;
+                }
         }
     }
 
