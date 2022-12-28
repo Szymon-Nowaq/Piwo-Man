@@ -24,13 +24,17 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
+        Debug.Log(Time.timeSinceLevelLoad);
         movement = GetComponent<Movement>();
         if ((gameOverbool && Input.GetKey(KeyCode.N)) || Input.GetKeyDown(KeyCode.R))
         {
             NewGame();
         }
         if (gameOverbool && Input.GetKey(KeyCode.Escape))
+        {
+            statsTime = Time.timeSinceLevelLoad;
             SceneManager.LoadScene("Menu");
+        }
         if (Input.GetKeyDown(KeyCode.K))
             StudentZgon();
     }
@@ -41,7 +45,7 @@ public class GameManager : MonoBehaviour
         win.SetActive(false);
         statsDeaths = 0; 
         statsKilled = 0;
-        statsTime= 0; 
+        statsTime = 0; 
         statsBeers = 0;
         SetLives(5);
         SetScore(0);
@@ -67,7 +71,6 @@ public class GameManager : MonoBehaviour
     }
     private void GameOver()
     {
-        statsTime = Time.timeSinceLevelLoad;
         foreach (Transform alkohol in this.alkohole)
             alkohol.gameObject.SetActive(false);
         for (int i = 0; i < this.jaguary.Length; i++)
