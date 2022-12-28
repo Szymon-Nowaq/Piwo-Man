@@ -7,7 +7,7 @@ public class Menu : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadScene("Piwo-man");
+        SceneManager.LoadScene("Level");
     }
 
     public void Quit()
@@ -21,6 +21,6 @@ public class Menu : MonoBehaviour
     }
     public void ShowStats()
     {
-        //SceneManager.LoadScene("Stats");
+        SceneManager.LoadScene("Stats");
     }
 }

@@ -22,9 +22,24 @@ public class JaguarNew : MonoBehaviour
     public Vector3Int homeCords;
     public Vector2[] tabVector = { Vector2.right, Vector2.left, Vector2.down, Vector2.up };
     public int index, idx = 1;
-    public float easyRndDur = 4.0f, easyChsDur = 1.0f, mediumRndDur = 2.0f, mediumChsDur = 2.0f, hardRndDur = 2.0f, hardChsDur = 3.0f, normalSpeed = 6.5f, homeSpeed = 3.0f;
+    public float easyRndDur, easyChsDur, mediumRndDur, mediumChsDur, hardRndDur, hardChsDur, normalSpeed = 6.5f, homeSpeed = 3.0f;
     void Start()
     {
+        switch (GameManager.level)
+        {
+            case GameManager.Level.easy:
+                easyRndDur = 4.0f;
+                easyChsDur = 1.0f;
+                break;
+            case GameManager.Level.medium:
+                mediumRndDur = 2.0f;
+                mediumChsDur = 2.0f;
+                break;
+            case GameManager.Level.hard:
+                hardRndDur = 2.0f;
+                hardChsDur = 3.0f;
+                break;
+        }
         VDirection = Vector2.up;
         this.movement = GetComponent<Movement>();
         this.node = GetComponent<Node>();

@@ -35,8 +35,6 @@ public class Student : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, 0, 90.0f);
         if (movement.currentDirection == Vector2.down)
             transform.rotation = Quaternion.Euler(0, 0, 270.0f);
-        if (movement.currentDirection != Vector2.zero)
-            GameManager.DistancePlus();
     }
     public void ResetStudent()
     {

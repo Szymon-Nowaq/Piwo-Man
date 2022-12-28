@@ -11,12 +11,12 @@ public class GameManager : MonoBehaviour
     public Time gameTime;
     public Movement movement { get; private set; }
     public enum Level { easy, medium, hard };
-    public static Level level = Level.hard;
+    public static Level level;
     public int score { get; private set; }
     public int lives { get; private set; }
     public int maxLives = 5;
     public static int statsDeaths = 0, statsKilled = 0, statsBeers = 0 ;
-    public static float statsDistance = 0;
+    public static float statsTime = 0;
     public bool gameOverbool = false;
     private void Start()
     {
@@ -41,7 +41,7 @@ public class GameManager : MonoBehaviour
         win.SetActive(false);
         statsDeaths = 0; 
         statsKilled = 0;
-        statsDistance = 0; 
+        statsTime= 0; 
         statsBeers = 0;
         SetLives(5);
         SetScore(0);
@@ -67,8 +67,7 @@ public class GameManager : MonoBehaviour
     }
     private void GameOver()
     {
-        statsDistance = statsDistance * Time.fixedDeltaTime * student.movement.speed;
-        Debug.Log(statsDistance);
+        statsTime = Time.timeSinceLevelLoad;
         foreach (Transform alkohol in this.alkohole)
             alkohol.gameObject.SetActive(false);
         for (int i = 0; i < this.jaguary.Length; i++)
@@ -160,10 +159,5 @@ public class GameManager : MonoBehaviour
     public void gameOverBool()
     {
         gameOverbool = true;
-    }
-
-    public static void DistancePlus()
-    {
-        statsDistance++;
     }
 }
