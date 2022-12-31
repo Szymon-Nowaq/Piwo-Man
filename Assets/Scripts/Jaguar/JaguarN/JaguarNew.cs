@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
+//using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -86,11 +86,8 @@ public class JaguarNew : MonoBehaviour
             List<double> distancesToStudent;
             distancesToStudent = new List<double>();
             for (int i = 0; i < node.availableDirection.Count; i++)
-                distancesToStudent.Add(Vector2.Distance((Vector2)this.transform.position + node.availableDirection[i], student.transform.position));
-            List<double> distancesToHome;
-            distancesToHome = new List<double>();
-            for (int i = 0; i < node.availableDirection.Count; i++)
-                distancesToHome.Add(Vector2.Distance((Vector2)this.transform.position + node.availableDirection[i], HomePosition));
+                distancesToStudent.Add(Vector2.Distance((Vector2)this.transform.position +
+                node.availableDirection[i], student.transform.position));
             switch (currentMode)
             {
                 case JaguarMode.Random:
@@ -113,10 +110,15 @@ public class JaguarNew : MonoBehaviour
                             maxI = i;
                     }
                     index = maxI;
-                    if (distancesToStudent[maxI] > 10)
+                    if (distancesToStudent[maxI] > 20)
                         index = UnityEngine.Random.Range(0, node.availableDirection.Count);
                     break;
                 case JaguarMode.Home:
+                    List<double> distancesToHome;
+                    distancesToHome = new List<double>();
+                    for (int i = 0; i < node.availableDirection.Count; i++)
+                        distancesToHome.Add(Vector2.Distance((Vector2)this.transform.position +
+                        node.availableDirection[i], HomePosition));
                     int minIH = 0;
                     for (int i = 1; i < node.availableDirection.Count; i++)
                     {
@@ -136,10 +138,6 @@ public class JaguarNew : MonoBehaviour
             }
             VDirection = node.availableDirection[index];
     }
-
-    //easy: random - 10s, chase - 10s
-    //medium: random - 8s, chase - 12s
-    //hard: random - 6s, chase - 14s
     public void ResetJaguar()
     {
         StopAllCoroutines();

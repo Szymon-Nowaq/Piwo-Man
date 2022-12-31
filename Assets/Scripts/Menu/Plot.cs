@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class plot : MonoBehaviour
+public class Plot : MonoBehaviour
 {
 
     private void Start()
