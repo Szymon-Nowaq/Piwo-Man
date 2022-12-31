@@ -17,7 +17,7 @@ public class Menu : MonoBehaviour
 
     public void PlayPlot()
     {
-        ;
+        SceneManager.LoadScene("Plot");
     }
     public void ShowStats()
     {
