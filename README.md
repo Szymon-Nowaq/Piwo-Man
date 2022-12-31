@@ -1,2 +1,2 @@
 # Piwo-Man
-student debil dziekan piwo
+student debil kocham piwo
