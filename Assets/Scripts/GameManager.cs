@@ -24,7 +24,6 @@ public class GameManager : MonoBehaviour
     }
     private void Update()
     {
-        Debug.Log(Time.timeSinceLevelLoad);
         movement = GetComponent<Movement>();
         if ((gameOverbool && Input.GetKey(KeyCode.N)) || Input.GetKeyDown(KeyCode.R))
         {
